@@ -1,160 +1,166 @@
+const inquirer = require("inquirer");
+const chalk = require("chalk");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
-const inquirer = require("inquirer");
-const fs = require("fs");
-const path = require("path");
-const writer = require("./src/write");
-const team = [];
+const generateHTML = require("./lib/generateHTML");
+
+// arrays for questions
+const employeeQuestions = [
+  { type: "input", message: `Please enter employee's name: `, name: "name" },
+  {
+    type: "input",
+    message: `Please enter their employee ID number: `,
+    name: "id",
+  },
+  {
+    type: "input",
+    message: `Please enter their email address: `,
+    name: "email",
+  },
+];
 const managerQuestions = [
   {
     type: "input",
-    name: "name",
-    message: "Manager's Name:",
-  },
-  {
-    type: "input",
-    name: "id",
-    message: "Managers ID Number:",
-  },
-  {
-    type: "input",
-    name: "email",
-    message: "Email Address:",
-  },
-  {
-    type: "input",
-    name: "number",
-    message: "Office Number:",
-  },
-];
-
-const employeeQuestions = [
-  {
-    type: "list",
-    name: "nextChoice",
-    message: "Would you like to add additional employees?",
-    choices: ["Engineer", "Intern", "No"],
+    message: `Please enter their office number: `,
+    name: "officeNum",
   },
 ];
 const engineerQuestions = [
   {
     type: "input",
-    name: "name",
-    message: "Engineer's Name:",
-  },
-  {
-    type: "input",
-    name: "id",
-    message: "ID Number:",
-  },
-  {
-    type: "input",
-    name: "email",
-    message: "Email Address:",
-  },
-  {
-    type: "input",
-    name: "gitHub",
-    message: "GitHub User Name:",
+    message: `Please enter their GitHub id: `,
+    name: "github",
   },
 ];
 const internQuestions = [
   {
     type: "input",
-    name: "name",
-    message: "Intern's Name:",
-  },
-  {
-    type: "input",
-    name: "id",
-    message: "ID Number:",
-  },
-  {
-    type: "input",
-    name: "email",
-    message: "Email Address:",
-  },
-  {
-    type: "input",
+    message: `Please enter their school: `,
     name: "school",
-    message: "School of Origin:",
+  },
+];
+const menuQuestion = [
+  {
+    type: "list",
+    message: `What type of employee would you like to add next? `,
+    choices: ["Engineer", "Intern", "None"],
+    // these choices look good and fit the theme, but don't work well in the switch
+    // choices: [
+    //   chalk.bgHex("#a4caee").white.bold(" Engineer "),
+    //   chalk.bgHex("#41d7a7").white.bold(" Intern   "),
+    //   " None",
+    // ],
+    name: "next",
   },
 ];
 
-engineerInput = () => {
-  inquirer
-    .prompt([...engineerQuestions, ...employeeQuestions])
-    .then((data) => {
-      team.push(new Engineer(data.name, data.id, data.email, data.gitHub));
-      switch (data.nextChoice) {
-        case "Engineer": {
-          engineerInput();
-          break;
-        }
-        case "Intern": {
-          internInput();
-          break;
-        }
-        case "No": {
-          printHtml(team);
-          break;
-        }
-      }
-    })
-    .catch((err) => console.log(err));
-};
-internInput = () => {
-  inquirer
-    .prompt([...internQuestions, ...employeeQuestions])
-    .then((data) => {
-      team.push(new Intern(data.name, data.id, data.email, data.school));
-      switch (data.nextChoice) {
-        case "Engineer": {
-          engineerInput();
-          break;
-        }
-        case "Intern": {
-          internInput();
-          break;
-        }
-        case "No": {
-          printHtml(team);
-          break;
-        }
-      }
-    })
-    .catch((err) => console.log(err));
-};
-const fileExport = (fileName, data) => {
-  return fs.writeFile(path.join(__dirname + "/dist", fileName), data, (err) =>
-    err ? console.error(err) : console.log("Success!")
+const team = []; // an array of team members
+
+function dispManagerQuestions() {
+  console.log(
+    chalk` Please create the team {bgHex('#e83283').white.bold Manager's} profile `
   );
-};
-printHtml = (data) => {
-  // console.log(data);
-  fileExport("index.html", writer(data));
-};
-
-listTeam = () => {
   inquirer
-    .prompt([...managerQuestions, ...employeeQuestions])
-    .then((data) => {
-      team.push(new Manager(data.name, data.id, data.email, data.number));
-      switch (data.nextChoice) {
-        case "Engineer": {
-          engineerInput();
-          break;
-        }
-        case "Intern": {
-          internInput();
-          break;
-        }
-        case "No":
-          printHtml(team);
+    .prompt([...employeeQuestions, ...managerQuestions])
+    .then((answers) => {
+      try {
+        team.push(
+          new Manager(
+            answers.name,
+            answers.id,
+            answers.email,
+            answers.officeNum
+          )
+        );
+        dispMenu();
+      } catch (error) {
+        console.log(chalk.redBright(error));
+        console.log("Please try again");
+        dispManagerQuestions();
       }
-    })
-    .catch((err) => console.log(err));
-};
+    });
+}
 
-listTeam();
+function dispEngineerQuestions() {
+  console.log(
+    chalk` Please create the team {bgHex("#a4caee").white.bold Engineer's} profile `
+  );
+  inquirer
+    .prompt([...employeeQuestions, ...engineerQuestions])
+    .then((answers) => {
+      try {
+        team.push(
+          new Engineer(answers.name, answers.id, answers.email, answers.github)
+        );
+        dispMenu();
+      } catch (error) {
+        console.log(chalk.redBright(error));
+        console.log("Please try again");
+        dispEngineerQuestions();
+      }
+    });
+}
+
+function dispInternQuestions() {
+  console.log(
+    chalk` Please create the team {bgHex('#41d7a7').white.bold Intern's} profile `
+  );
+  inquirer
+    .prompt([...employeeQuestions, ...internQuestions])
+    .then((answers) => {
+      try {
+        team.push(
+          new Intern(answers.name, answers.id, answers.email, answers.school)
+        );
+        dispMenu();
+      } catch (error) {
+        console.log(chalk.redBright(error));
+        console.log("Please try again");
+        dispInternQuestions();
+      }
+    });
+}
+
+function dispMenu() {
+  inquirer.prompt(menuQuestion).then((option) => {
+    // console.log(typeof option.next);
+    // console.log(`'${option.next.trim()}'`);
+
+    // to make things display nicer, I added space, must remove extra space for the compare
+    switch (option.next.trim()) {
+      case "Engineer":
+        dispEngineerQuestions();
+        break;
+      case "Intern":
+        dispInternQuestions();
+        break;
+      default:
+        makeHTMLFile();
+    }
+  });
+}
+
+function makeHTMLFile() {
+  generateHTML(team);
+  console.log(
+    "\n\n",
+    chalk
+      .bgHex("#686dc3")
+      .white.bold(" Find your webpage in the 'dist' folder ")
+  );
+  console.log("\n");
+}
+
+function init() {
+  console.log(chalk.bgHex("#686dc3").white.bold(" ----------------------- "));
+  console.log(chalk.bgHex("#686dc3").white.bold(" Welcome to Team Builder "));
+  console.log(
+    chalk.bgHex("#686dc3").white.bold(" ----------------------- "),
+    "\n"
+  );
+
+  dispManagerQuestions();
+}
+
+init();
