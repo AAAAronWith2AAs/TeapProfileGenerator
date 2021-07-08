@@ -4,11 +4,117 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <link rel="stylesheet" href="./assets/style.css" />
+
+    <title>Team Profile</title>
+
+    <!-- Bootstrap CSS (from bootswatch.com: Quartz)-->
+    <link href="./bootstrap.css" rel="stylesheet" />
+
+    <!-- font awesome for icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+
+    <!-- adding style tag here rather than doing custom sheet or messing with the imported bootstrap -->
+    <style>
+      header {
+        color: #fff;
+        background-color: #686dc3;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
+      }
+    </style>
   </head>
   <body>
-    <script src="./assets/index.js"></script>
+    <header class="container-fluid p-3 text-center border-bottom sticky-top">
+      <h1>Team Profile</h1>
+    </header>
+
+    <!-- Manager Div (there will always be a manager) -->
+    <div class="container p-2 d-flex justify-content-center">
+      <div class="manager card border-primary col-12 col-md-5 col-lg-3">
+        <div class="card-header lh-lg h4 text-center p-1">
+          <i class="fas fa-mug-hot pe-2"></i>Manager
+        </div>
+        <div class="card-body px-2 pt-1">
+          <h4 class="card-title">Todd</h4>
+          <ul class="list-group">
+            <li class="list-group-item p-1">ID: 12</li>
+            <li class="list-group-item p-1">
+              Email: <a href="mailto:todd@abc.com">todd@abc.com</a>
+            </li>
+            <li class="list-group-item p-1">Office: Suite A</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Start Engineer and Intern Div -->
+    <div class="container p-2 d-flex justify-content-evenly flex-wrap">
+      <!-- Engineer Div -->
+      <div class="engineer card border-secondary col-12 col-md-5 col-lg-3 m-1">
+        <div class="card-header lh-lg h4 text-center p-1">
+          <i class="fas fa-code pe-2"></i>Engineer
+        </div>
+        <div class="card-body px-2 pt-1">
+          <h4 class="card-title">Sergio</h4>
+          <ul class="list-group">
+            <li class="list-group-item p-1">ID: 123</li>
+            <li class="list-group-item p-1">
+              Email: <a href="mailto:serg@abc.com">serg@abc.com</a>
+            </li>
+            <li class="list-group-item p-1">
+              GitHub: <a href="https://github.com/Serg" target="_blank">Serg</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Engineer Div -->
+      <div class="engineer card border-secondary col-12 col-md-5 col-lg-3 m-1">
+        <div class="card-header lh-lg h4 text-center p-1">
+          <i class="fas fa-code pe-2"></i>Engineer
+        </div>
+        <div class="card-body px-2 pt-1">
+          <h4 class="card-title">Jack</h4>
+          <ul class="list-group">
+            <li class="list-group-item p-1">ID: 124</li>
+            <li class="list-group-item p-1">
+              Email: <a href="mailto:jack@abc.com">jack@abc.com</a>
+            </li>
+            <li class="list-group-item p-1">
+              GitHub: <a href="https://github.com/Jack" target="_blank">Jack</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Intern Div -->
+      <div class="intern card border-success col-12 col-md-5 col-lg-3 m-1">
+        <div class="card-header lh-lg h4 text-center p-1">
+          <i class="fas fa-user-graduate pe-2"></i>Intern
+        </div>
+        <div class="card-body px-2 pt-1">
+          <h4 class="card-title">Jane</h4>
+          <ul class="list-group">
+            <li class="list-group-item p-1">ID: 212</li>
+            <li class="list-group-item p-1">
+              Email: <a href="mailto:jane@abc.com">jane@abc.com</a>
+            </li>
+            <li class="list-group-item p-1">School: DU</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- End Engineer and Intern Div -->
+    </div>
+    <!-- Footer Template -->
+    <!--  Bootstrap Bundle with Popper -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4"
+      crossorigin="anonymous"
+    ></script>
   </body>
 </html>
- //bootstrap
