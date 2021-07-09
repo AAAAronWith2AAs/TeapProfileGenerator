@@ -64,13 +64,4 @@ Enter the employee information. When complete, copy the website out of the 'dist
 
 Run npm Test
 
-## Credits
 
-Team:
-
-- Lauren Gabaldon
-- Josh Lee
-- Jared Sutch
-- Lacey Pape
-- Alex Jurgs
-- Tarik Maggio
