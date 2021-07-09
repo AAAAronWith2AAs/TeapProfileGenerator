@@ -60,7 +60,7 @@ describe("Intern", () => {
       expect(result).toEqual(school);
     });
   });
-  //here
+
   describe("getRole", () => {
     it("should return 'Intern'", () => {
       const obj = new Intern(name, id, email, school);

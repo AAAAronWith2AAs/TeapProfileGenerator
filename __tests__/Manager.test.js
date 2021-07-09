@@ -37,7 +37,7 @@ describe("Manager", () => {
       expect(result).toEqual(officeNum);
     });
   });
-  //comment
+
   describe("getRole", () => {
     it("should return 'Manager'", () => {
       const obj = new Manager(name, id, email, officeNum);

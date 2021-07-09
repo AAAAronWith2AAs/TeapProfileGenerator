@@ -4,7 +4,7 @@ const Engineer = require("../lib/Engineer");
 const name = "John Smith";
 const id = 1234;
 const email = "email@test.com";
-const github = "AaronDMendoza";
+const github = "Chip-L";
 
 describe("Engineer", () => {
   describe("Initialization", () => {
