@@ -4,9 +4,9 @@
 
 This is a command-line application that takes in information about employees on a software engineering team, then generates an HTML webpage that displays summaries for each person
 
-Completed site's code: [https://github.com/Chip-L/teamProfileGenerator]
+Completed site's code: https://github.com/AaronDMendoza/TeapProfileGenerator
 
-Video of working application: [https://drive.google.com/file/d/122Ya_Pt2S9cOE29a36q4pvjCKT4Z8OW9/view]
+Video of working application: https://drive.google.com/file/d/1D4DYUiKXTP11e3MlHdWA92EsrnAVMnvF/view
 
 ## Table of Contents
 
